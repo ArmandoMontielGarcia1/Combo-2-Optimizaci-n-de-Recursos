@@ -15,80 +15,83 @@ Además, algunas texturas son compartidas por múltiples objetos en el juego, po
 # CODIGO:
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-// Singleton
-public class TextureManager
+namespace ConsoleApp1
 {
-    private static TextureManager instance;
-    private Dictionary<string, Texture> textures;
-
-    private TextureManager()
-    {
-        textures = new Dictionary<string, Texture>();
-    }
-
-    public static TextureManager GetInstance()
-    {
-        if (instance == null)
+    
+        // Singleton
+        public class TextureManager
         {
-            instance = new TextureManager();
-        }
-        return instance;
-    }
+            private static TextureManager instance;
+            private Dictionary<string, Texture> textures;
 
-    // Flyweight
-    public Texture GetTexture(string filename)
-    {
-        if (!textures.ContainsKey(filename))
+            private TextureManager()
+            {
+                textures = new Dictionary<string, Texture>();
+            }
+
+            public static TextureManager GetInstance()
+            {
+                if (instance == null)
+                {
+                    instance = new TextureManager();
+                }
+                return instance;
+            }
+
+            // Flyweight
+            public Texture GetTexture(string filename)
+            {
+                if (!textures.ContainsKey(filename))
+                {
+                    // Si la textura no existe, la creamos y la almacenamos en el diccionario.
+                    Texture texture = new Texture(filename);
+                    textures.Add(filename, texture);
+                }
+                return textures[filename];
+            }
+        }
+
+        // Flyweight
+        public class Texture
         {
-            // Si la textura no existe, la creamos y la almacenamos en el diccionario.
-            Texture texture = new Texture(filename);
-            textures.Add(filename, texture);
+            private string filename;
+
+            public Texture(string filename)
+            {
+                this.filename = filename;
+                // Aquí podría haber lógica para cargar la textura desde el archivo.
+            }
+
+            public void Render()
+            {
+                // Lógica para renderizar la textura.
+                Console.WriteLine("Rendering texture: " + filename);
+            }
         }
-        return textures[filename];
-    }
+
+        // Ejemplo de uso
+        class Programa
+        {
+            static void Main(string[] args)
+            {
+                TextureManager textureManager = TextureManager.GetInstance();
+
+                // Obtenemos una instancia de la textura 'grass.png'
+                Texture grassTexture = textureManager.GetTexture("grass.png");
+                grassTexture.Render();
+
+                // Obtenemos otra instancia de la misma textura
+                Texture sameGrassTexture = textureManager.GetTexture("grass.png");
+                sameGrassTexture.Render(); // No se vuelve a cargar la textura, se reutiliza la misma instancia
+
+                // Obtenemos una instancia de otra textura
+                Texture stoneTexture = textureManager.GetTexture("stone.png");
+                stoneTexture.Render();
+            }
+        }
 }
 
-// Flyweight
-public class Texture
-{
-    private string filename;
-
-    public Texture(string filename)
-    {
-        this.filename = filename;
-        // Aquí podría haber lógica para cargar la textura desde el archivo.
-    }
-
-    public void Render()
-    {
-        // Lógica para renderizar la textura.
-        Console.WriteLine("Rendering texture: " + filename);
-    }
-}
-
-// Ejemplo de uso
-class Program
-{
-    static void Main(string[] args)
-    {
-        TextureManager textureManager = TextureManager.GetInstance();
-
-        // Obtenemos una instancia de la textura 'grass.png'
-        Texture grassTexture = textureManager.GetTexture("grass.png");
-        grassTexture.Render();
-
-        // Obtenemos otra instancia de la misma textura
-        Texture sameGrassTexture = textureManager.GetTexture("grass.png");
-        sameGrassTexture.Render(); // No se vuelve a cargar la textura, se reutiliza la misma instancia
-
-        // Obtenemos una instancia de otra textura
-        Texture stoneTexture = textureManager.GetTexture("stone.png");
-        stoneTexture.Render();
-    }
-}
-
-La clase TextureManager actúa como un Singleton que gestiona las texturas en el juego. Utiliza el patrón Flyweight para reutilizar las instancias de texturas compartidas. 
-Cuando se solicita una textura mediante el método getTexture, el TextureManager comprueba si ya existe una instancia de esa textura en el mapa. 
-Si no existe, crea una nueva instancia y la almacena en el mapa; de lo contrario, simplemente devuelve la instancia existente. 
-Esto garantiza que solo haya una instancia de cada textura y que las texturas compartidas sean reutilizadas en todo el juego, optimizando así el uso de memoria.
