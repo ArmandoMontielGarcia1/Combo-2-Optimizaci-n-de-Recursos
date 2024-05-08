@@ -16,7 +16,6 @@ Además, algunas texturas son compartidas por múltiples objetos en el juego, po
 import java.util.HashMap;
 import java.util.Map;
 
-// Singleton
     public class TextureManager {
     private static TextureManager instance;
     private Map<String, Texture> textures;
@@ -32,7 +31,6 @@ import java.util.Map;
         return instance;
     }
 
-    // Flyweight
         public Texture getTexture(String filename) {
         if (!textures.containsKey(filename)) {
             // Si la textura no existe, la creamos y la almacenamos en el mapa.
@@ -43,7 +41,6 @@ import java.util.Map;
     }
 }
 
-// Flyweight
     public class Texture {
     private String filename;
 
@@ -58,7 +55,6 @@ import java.util.Map;
     }
 }
 
-// Ejemplo de uso
     public class Main {
     public static void main(String[] args) {
         TextureManager textureManager = TextureManager.getInstance();
