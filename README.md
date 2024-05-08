@@ -8,12 +8,11 @@ Dos patrones de diseño que pueden ser útiles para lograr esto son el Singleton
 # Singleton: 
 Este patrón garantiza que una clase tenga una única instancia y proporciona un punto de acceso global a esa instancia. 
 Es útil cuando solo se necesita una instancia de una clase en todo el sistema. Esto puede ayudar a optimizar el uso de recursos al evitar la creación de múltiples instancias de una clase que consume muchos recursos.
-
-Ejemplo combinado de Singleton y Flyweight en Java:
+# Ejemplo combinado de Singleton y Flyweight en Java:
 Supongamos que tenemos una clase Texture que representa una textura en un juego,
 y queremos garantizar que solo exista una instancia de cada textura en todo el juego para optimizar el uso de memoria. 
 Además, algunas texturas son compartidas por múltiples objetos en el juego, por lo que también queremos utilizar el patrón Flyweight para reutilizar esas texturas compartidas.
-CODIGO:
+# CODIGO:
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +76,7 @@ public class Main {
         stoneTexture.render();
     }
 }
+
 La clase TextureManager actúa como un Singleton que gestiona las texturas en el juego. 
 Utiliza el patrón Flyweight para reutilizar las instancias de texturas compartidas. 
 Cuando se solicita una textura mediante el método getTexture, el TextureManager comprueba si ya existe una instancia de esa textura en el mapa. 
