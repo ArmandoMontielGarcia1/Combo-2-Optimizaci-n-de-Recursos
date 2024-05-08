@@ -81,8 +81,7 @@ public class Main {
     }
 }
 
-La clase TextureManager actúa como un Singleton que gestiona las texturas en el juego. 
-Utiliza el patrón Flyweight para reutilizar las instancias de texturas compartidas. 
+La clase TextureManager actúa como un Singleton que gestiona las texturas en el juego. Utiliza el patrón Flyweight para reutilizar las instancias de texturas compartidas. 
 Cuando se solicita una textura mediante el método getTexture, el TextureManager comprueba si ya existe una instancia de esa textura en el mapa. 
 Si no existe, crea una nueva instancia y la almacena en el mapa; de lo contrario, simplemente devuelve la instancia existente. 
 Esto garantiza que solo haya una instancia de cada textura y que las texturas compartidas sean reutilizadas en todo el juego, optimizando así el uso de memoria.
