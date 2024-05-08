@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // Singleton
+
 public class TextureManager {
     private static TextureManager instance;
     private Map<String, Texture> textures;
@@ -33,6 +34,7 @@ public class TextureManager {
     }
 
     // Flyweight
+    
     public Texture getTexture(String filename) {
         if (!textures.containsKey(filename)) {
             // Si la textura no existe, la creamos y la almacenamos en el mapa.
@@ -44,6 +46,7 @@ public class TextureManager {
 }
 
 // Flyweight
+
 public class Texture {
     private String filename;
 
@@ -59,6 +62,7 @@ public class Texture {
 }
 
 // Ejemplo de uso
+
 public class Main {
     public static void main(String[] args) {
         TextureManager textureManager = TextureManager.getInstance();
