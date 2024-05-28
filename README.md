@@ -13,14 +13,14 @@ Supongamos que tenemos una clase Texture que representa una textura en un juego,
 y queremos garantizar que solo exista una instancia de cada textura en todo el juego para optimizar el uso de memoria. 
 Además, algunas texturas son compartidas por múltiples objetos en el juego, por lo que también queremos utilizar el patrón Flyweight para reutilizar esas texturas compartidas.
 # CODIGO:
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-namespace ConsoleApp1
-{
+    namespace ConsoleApp1
+    {
     
         // Singleton
         public class TextureManager
@@ -93,5 +93,5 @@ namespace ConsoleApp1
                 stoneTexture.Render();
             }
         }
-}
+    }
 
